@@ -67,7 +67,7 @@ function NewsCard() {
         <CardImg src={news?.imageUrl} alt="" className='card-img me-2'  />
         <div className='d-block'>
         <CardTitle className='lead text-black'>{news?.title}</CardTitle>
-        <CardText className='lead small date'><span className='strong'>short</span> by {news?.author} / {news?.date}</CardText>
+        <CardText className='lead small date'><span><strong>short</strong></span> by {news?.author} / {news?.date}</CardText>
             <CardText className='lead mb-0'>{news?.content}</CardText>
             {news.readMoreUrl?<CardText className='lead text-black cursor-pointer mb-0'><a className='read-more' target='_blank' href={news?.readMoreUrl}>Read more...</a></CardText>:<></>}
         </div>
