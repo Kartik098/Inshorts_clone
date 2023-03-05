@@ -83,18 +83,19 @@ nav{
     margin-right: 5px;
 }
 .para{
+   
     margin-top: -10px;
     z-index: 20 !important; 
     top:0;
     position: fixed !important;
 }
 .sidebar{
-    width: 300px !important;
+    width: 230px !important;
     position: fixed !important;
     top:0;
     margin-left: -20px;
     border-right: 1px solid black;
-    height: 1000px;
+    height: 1200px !important;
     background-color: #303036;
    
 }
@@ -104,7 +105,7 @@ nav{
    
 }
 .closebtn{
-    margin-left: -20px;
+    margin-left: -80px;
     margin-top: 30px;
 }
 
@@ -116,9 +117,27 @@ nav{
     cursor: pointer !important;
     color: black !important;
 }
+
 .read-more{
   
     text-decoration: none !important;
     margin-top: -30px !important;
     color: black;
+}
+.selected{
+    background-color: #808290 !important;
+    width: 200px !important;
+    margin-left: -40px !important;
+    color: white;
+    border: none;
+}
+.notselected{
+    border: none;
+    margin-left: -40px !important;
+    width: 200px !important;
+    background-color: transparent;
+    color: white;
+}
+.notselected:hover{
+    background-color: #44444D;
 }

@@ -7,6 +7,7 @@ import { Col, Row } from 'reactstrap'
 function Sidebar() {
 
     let [showSideBar, setShowsidebar] = useState(false)
+   
     const [categoryIndex, setCategoryIndex] = useState(0)
     let dispatch = useDispatch()
     const menuItems = ["all","national", "business", "sports", "world", "politics", "technology", "startup","entertainment", "miscellaneous","hatke","science", "automobile" ]
@@ -16,23 +17,39 @@ function Sidebar() {
         console.log(menuItems[categoryIndex])
     },[categoryIndex])
   return (
-    <div className='container position-fixed para'>
+    <div className='container position-fixed para '>
      {!showSideBar?<p className='d-block '><Menu id='menu' onClick={()=>setShowsidebar(true)} /> Menu</p>:<></>}
      <Row><Col xl='3'>
    {showSideBar?
     <div className='sidebar p-2 postion-fixed ' id='sidebar'>
-        <div className='top_section ms-5'>
+        <div className='top_section ms-4'>
         
        
-        <img src={logo} alt='' width='200px' />
+        <img src={logo} alt='' width='180px' />
         </div>
        <div className='ms-5' >
        <p className='category'>
         Categories
        </p> {
-            menuItems.map((item, index)=>(
-                <button onClick={()=>{setCategoryIndex(index);setShowsidebar(false)}}  key={index} className='link d-block p-2 my-3 w-75' >{item}</button>
-            ))
+            menuItems.map((item, index)=>{
+             
+              item =item[0].toUpperCase() + item.substring(1)
+              if(item == "National"){
+                item = "Indian"
+              } else if(item == "All"){
+                item = "All news"
+              } 
+              let item1 = {name:item,class:"notselected"}
+            
+              if(categoryIndex==index){
+                debugger
+                item1 = {name:item,class:"selected"}
+              } 
+             
+              return (
+                <button  onClick={()=>{setCategoryIndex(index)}}   key={index} className={"link d-block p-2 my-3  "+item1.class} >{item1.name}</button>
+              )
+       })
         }</div>
       
     </div>:<></>}
