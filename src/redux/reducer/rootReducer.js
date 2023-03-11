@@ -4,7 +4,8 @@ import { createSlice } from '@reduxjs/toolkit'
 export const categorySlice = createSlice({
   name: 'category',
   initialState: {
-    value: 'all'
+    value: 'all',
+    close:false
   },
   reducers: {
     changeCategory: (state, action) => {
@@ -14,11 +15,14 @@ export const categorySlice = createSlice({
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
       state.value = action.payload
+    },
+    closeSidebar:(state,action)=>{
+      state.close = action.payload
     }
   }
 })
 
 // Action creators are generated for each case reducer function
-export const {  changeCategory } = categorySlice.actions
+export const {  changeCategory,closeSidebar } = categorySlice.actions
 
 export default categorySlice.reducer

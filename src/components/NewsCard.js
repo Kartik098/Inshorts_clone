@@ -4,9 +4,11 @@ import loader from '../assets/images/loader.gif'
 import logo from '../assets/images/logo.png'
 import helper from '../assets/images/helper.png'
 import axios from 'axios'
-import { useSelector } from 'react-redux'
+import { closeSidebar } from '../redux/reducer/rootReducer'
+import { useDispatch, useSelector } from 'react-redux'
 function NewsCard() {
   let data = useSelector(state => state)
+  let dispatch = useDispatch()
   useEffect(()=>{
     document.getElementById("loader").classList.remove("collapsed")
     document.getElementById("newsCards").classList.add("collapsed")
@@ -16,7 +18,9 @@ function NewsCard() {
     getData()
    
   },[data.counter.value])
-  
+  function closeSidebarfn(){
+    dispatch(closeSidebar(true))
+  }
   let [newsData, setNewsData] = useState([])
   async function getNews(){
  await axios.get(`https://inshorts.deta.dev/news?category=${data.counter.value}`,{headers:{
@@ -48,7 +52,8 @@ function NewsCard() {
   },[])
   return (
     <>
-    <Navbar >
+   <div onClick={closeSidebarfn}>
+   <Navbar >
       <div className='navbar'>
       <img src={logo} alt='' width='150px' className='position-fixed mt-5' />
       </div>
@@ -84,6 +89,7 @@ function NewsCard() {
     </Row>
      </Container>
     
+   </div>
        
     </>
   )

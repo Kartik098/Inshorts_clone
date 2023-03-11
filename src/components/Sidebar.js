@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { Menu, X } from 'react-feather'
 import logo from '../assets/images/logo.png'
-import { useDispatch } from 'react-redux'
-import { changeCategory } from '../redux/reducer/rootReducer'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeCategory, closeSidebar } from '../redux/reducer/rootReducer'
+
 import { Col, Row } from 'reactstrap'
 function Sidebar() {
-
+  let data = useSelector(state => state)
+  
+  
     let [showSideBar, setShowsidebar] = useState(false)
-   
+useEffect(()=>{
+  if(data.counter.close){
+    setShowsidebar(false)
+  }
+},[data.counter.close])
     const [categoryIndex, setCategoryIndex] = useState(0)
     let dispatch = useDispatch()
+    function closeSidebarfn(){
+      dispatch(closeSidebar(false))
+    }
     const menuItems = ["all","national", "business", "sports", "world", "politics", "technology", "startup","entertainment", "miscellaneous","hatke","science", "automobile" ]
     useEffect(()=>{
    
@@ -18,7 +28,7 @@ function Sidebar() {
     },[categoryIndex])
   return (
     <div className='container position-fixed para '>
-     {!showSideBar?<p className='d-block '><Menu id='menu' onClick={()=>setShowsidebar(true)} /> Menu</p>:<></>}
+     {!showSideBar?<p className='d-block '><Menu id='menu' onClick={()=>{setShowsidebar(true);closeSidebarfn()}} /> Menu</p>:<></>}
      <Row><Col xl='3'>
    {showSideBar?
     <div className='sidebar p-2 postion-fixed ' id='sidebar'>
@@ -42,7 +52,7 @@ function Sidebar() {
               let item1 = {name:item,class:"notselected"}
             
               if(categoryIndex==index){
-                debugger
+                
                 item1 = {name:item,class:"selected"}
               } 
              
@@ -57,7 +67,11 @@ function Sidebar() {
     <Col xl='3'>
     {showSideBar?<p className='cursor-pointer closebtn' onClick={()=> setShowsidebar(false)}><X /> Close</p>:<></>}
     </Col>
+    <Col>
+  
+    </Col>
     </Row>
+    
     </div>
   )
 }
